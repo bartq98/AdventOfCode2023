@@ -1,10 +1,14 @@
 #!/bin/python
 
-# PT 1.:
+from pprint import pprint, pformat
+import sys
 
-def calculate_sum_of_first_and_last(file_path) -> int:
-    f = open(file_path, "r")
-    lines = f.readlines()
+sys.path.append('../')
+
+from helpers import get_input
+
+def exercise_1():
+    lines = get_input()
 
     sum = 0
     for line in lines:
@@ -12,12 +16,10 @@ def calculate_sum_of_first_and_last(file_path) -> int:
         first_digit = digits[0]
         last_digit  = digits[-1]
         sum += first_digit * 10 + last_digit
-    return sum
+    print(sum)
 
-
-# PT 2.:
-
-def calculate_sum_of_first_and_last_with_spelled(file_path) -> int:
+def exercise_2():
+    lines = get_input()
 
     DIGITS = {
         'one' : 1,
@@ -40,9 +42,6 @@ def calculate_sum_of_first_and_last_with_spelled(file_path) -> int:
         '9' : 9,
     }
 
-    f = open(file_path, "r")
-    lines = f.readlines()
-
     sum = 0
     for line in lines:
         found_digits = [(i, digit) for i, _ in enumerate(line) for digit in DIGITS if line[i:i+len(digit)] == digit]
@@ -50,10 +49,10 @@ def calculate_sum_of_first_and_last_with_spelled(file_path) -> int:
         first_digit = DIGITS.get(all_digits[0][1])
         last_digit = DIGITS.get(all_digits[-1][1])
         sum += first_digit*10 + last_digit
-    return sum
+    print(sum)
 
 if __name__ == '__main__':
-    first_exercise = calculate_sum_of_first_and_last('exercise_1.txt')
-    print(f'First exercise: {first_exercise}')
-    second_exercise = calculate_sum_of_first_and_last_with_spelled('exercise_2.txt')
-    print(f'Second exercise: {second_exercise}')
+    print('Part #01:', end=" ")
+    exercise_1()
+    print('Part #02:', end=" ")
+    exercise_2()
